@@ -1,0 +1,159 @@
+import javafx.event.ActionEvent;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Circle;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+
+
+public class Hangman extends Application 
+{
+  @Override
+  public void start(Stage primaryStage) 
+  {
+    LinePane pane = new LinePane();
+    
+    Scene scene = new Scene(pane, 975, 1000);
+    primaryStage.setTitle("Hangman Game");
+    primaryStage.setScene(scene);             
+    primaryStage.show();
+  }
+  
+  private HBox getHBox() 
+  {
+    HBox hBox = new HBox(10); 
+    Button[] letters = { new Button("A"), new Button("B"), new Button("C"), new Button("D"), new Button("E"), new Button("F"), new Button("G"), new Button("H"), new Button("I"), new Button("J"), new Button("K"), new Button("L"), new Button("M"), new Button("N"), new Button("O"), new Button("P"), new Button("Q"), new Button("R"), new Button("S"), new Button("T"), new Button("U"), new Button("V"), new Button("W"), new Button("X"), new Button("Y"), new Button("Z")}; 
+    for (Button letter: letters) 
+    {
+      hBox.getChildren().add(letter);
+    }
+    return hBox;
+  }
+}
+
+class LinePane extends Pane 
+{
+  public LinePane() 
+  {
+    Line rightLeg = new Line(500, 400, 600, 600);
+    rightLeg.setStrokeWidth(5);
+    rightLeg.setStroke(Color.TOMATO);
+    getChildren().add(rightLeg);
+    
+    Line leftLeg = new Line(500, 400, 400, 600);
+    leftLeg.setStrokeWidth(5);
+    leftLeg.setStroke(Color.TOMATO);
+    getChildren().add(leftLeg);
+    
+    Line body = new Line(500, 400, 500, 200);
+    body.setStrokeWidth(5);
+    body.setStroke(Color.TOMATO);
+    getChildren().add(body);
+    
+    Line rightArm = new Line(500, 200, 600, 400);
+    rightArm.setStrokeWidth(5);
+    rightArm.setStroke(Color.TOMATO);
+    getChildren().add(rightArm);
+    
+    Line leftArm = new Line(500, 200, 400, 400);
+    leftArm.setStrokeWidth(5);
+    leftArm.setStroke(Color.TOMATO);
+    getChildren().add(leftArm);
+   
+    Circle head = new Circle(500, 150, 50);
+    head.setStrokeWidth(5);
+    head.setStroke(Color.TOMATO);
+    head.setFill(Color.TOMATO);
+    getChildren().add(head);
+    
+    HBox hBox = new HBox(10); 
+    Button[] letters = { new Button("A"), new Button("B"), new Button("C"), new Button("D"), new Button("E"), new Button("F"), new Button("G"), new Button("H"), new Button("I"), new Button("J"), new Button("K"), new Button("L"), new Button("M"), new Button("N"), new Button("O"), new Button("P"), new Button("Q"), new Button("R"), new Button("S"), new Button("T"), new Button("U"), new Button("V"), new Button("W"), new Button("X"), new Button("Y"), new Button("Z")}; 
+    for (Button letter: letters) 
+    {
+        int horizontal = 0;
+        letter.setLayoutX(horizontal);
+        getChildren().add(letter);
+        horizontal = horizontal + 10;
+    }
+    
+    /*
+    HBox letters = new HBox(10);
+    letters.setLayoutY(950);
+    Button A = new Button("A");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button B = new Button("B");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button C = new Button("C");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button D = new Button("D");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button E = new Button("E");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button F = new Button("F");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button G = new Button("G");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button H = new Button("H");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button I = new Button("I");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button J = new Button("J");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button K = new Button("K");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button L = new Button("L");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button M = new Button("M");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button N = new Button("N");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button O = new Button("O");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button P = new Button("P");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button Q = new Button("Q");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button R = new Button("R");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button S = new Button("S");
+    A.setLayoutX(50);
+    A.setLayoutY(900);
+    Button T = new Button("T");
+    Button U = new Button("U");
+    Button V = new Button("V");
+    Button W = new Button("W");
+    Button X = new Button("X");
+    Button Y = new Button("Y");
+    Button Z = new Button("Z");
+    getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);*/
+    
+  }
+  
+}
+
