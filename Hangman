@@ -13,128 +13,149 @@ import java.lang.String;
 
 public class Hangman extends Application 
 {
+  String secretWord;
+  int stickManPartsCount = 0;
+  Pane pane = new Pane();
+  boolean lose = false;
+    
   @Override
   public void start(Stage primaryStage) 
   {
-    Pane pane = new Pane();
     Scene scene = new Scene(pane, 1350, 1000);
     primaryStage.setTitle("Hangman Game");
     primaryStage.setScene(scene);             
     primaryStage.show();
     
-    TextField secretWord = new TextField();
-    pane.getChildren().add(secretWord);
+    final TextField TFsecretWord = new TextField();
+    pane.getChildren().add(TFsecretWord);
     Button BTNConfirm = new Button("confirm");
-    ConfirmButtonHandler handler1 = new ConfirmButtonHandler();
-    BTNConfirm.setOnAction(handler1);
     BTNConfirm.setLayoutY(25);
+    BTNConfirm.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           secretWord = TFsecretWord.getText();
+        }
+    });
+    
     pane.getChildren().add(BTNConfirm);
-      
-    Line rightLeg = new Line(500, 400, 600, 600);
-    rightLeg.setStrokeWidth(5);
-    rightLeg.setStroke(Color.TOMATO);
-    
-    Line leftLeg = new Line(500, 400, 400, 600);
-    leftLeg.setStrokeWidth(5);
-    leftLeg.setStroke(Color.TOMATO);
-    
-    Line body = new Line(500, 400, 500, 200);
-    body.setStrokeWidth(5);
-    body.setStroke(Color.TOMATO);
-    
-    Line rightArm = new Line(500, 200, 600, 400);
-    rightArm.setStrokeWidth(5);
-    rightArm.setStroke(Color.TOMATO);
-    
-    Line leftArm = new Line(500, 200, 400, 400);
-    leftArm.setStrokeWidth(5);
-    leftArm.setStroke(Color.TOMATO);
+    final Line[] stickManParts = {new Line(500, 400, 600, 600), new Line(500, 400, 400, 600), new Line(500, 400, 500, 200), new Line(500, 200, 600, 400), new Line(500, 200, 400, 400)};
+    for(int index = 0; index < stickManParts.length; index++)
+    {
+        stickManParts[index].setStrokeWidth(5);
+        stickManParts[index].setStroke(Color.TOMATO);
+    }
    
     Circle head = new Circle(500, 150, 50);
     head.setStrokeWidth(5);
     head.setStroke(Color.TOMATO);
     head.setFill(Color.TOMATO);
     
-    Button A = new Button("A");
+    final Button A = new Button("A");
     A.setLayoutX(50);
     A.setLayoutY(900);
-    Button B = new Button("B");
+    final Button B = new Button("B");
     B.setLayoutX(100);
     B.setLayoutY(900);
-    Button C = new Button("C");
+    final Button C = new Button("C");
     C.setLayoutX(150);
     C.setLayoutY(900);
-    Button D = new Button("D");
+    final Button D = new Button("D");
     D.setLayoutX(200);
     D.setLayoutY(900);
-    Button E = new Button("E");
+    final Button E = new Button("E");
     E.setLayoutX(250);
     E.setLayoutY(900);
-    Button F = new Button("F");
+    final Button F = new Button("F");
     F.setLayoutX(300);
     F.setLayoutY(900);
-    Button G = new Button("G");
+    final Button G = new Button("G");
     G.setLayoutX(350);
     G.setLayoutY(900);
-    Button H = new Button("H");
+    final Button H = new Button("H");
     H.setLayoutX(400);
     H.setLayoutY(900);
-    Button I = new Button("I");
+    final Button I = new Button("I");
     I.setLayoutX(450);
     I.setLayoutY(900);
-    Button J = new Button("J");
+    final Button J = new Button("J");
     J.setLayoutX(500);
     J.setLayoutY(900);
-    Button K = new Button("K");
+    final Button K = new Button("K");
     K.setLayoutX(550);
     K.setLayoutY(900);
-    Button L = new Button("L");
+    final Button L = new Button("L");
     L.setLayoutX(600);
     L.setLayoutY(900);
-    Button M = new Button("M");
+    final Button M = new Button("M");
     M.setLayoutX(650);
     M.setLayoutY(900);
-    Button N = new Button("N");
+    final Button N = new Button("N");
     N.setLayoutX(700);
     N.setLayoutY(900);
-    Button O = new Button("O");
+    final Button O = new Button("O");
     O.setLayoutX(750);
     O.setLayoutY(900);
-    Button P = new Button("P");
+    final Button P = new Button("P");
     P.setLayoutX(800);
     P.setLayoutY(900);
-    Button Q = new Button("Q");
+    final Button Q = new Button("Q");
     Q.setLayoutX(850);
     Q.setLayoutY(900);
-    Button R = new Button("R");
+    final Button R = new Button("R");
     R.setLayoutX(900);
     R.setLayoutY(900);
-    Button S = new Button("S");
+    final Button S = new Button("S");
     S.setLayoutX(950);
     S.setLayoutY(900);
-    Button T = new Button("T");
+    final Button T = new Button("T");
     T.setLayoutX(1000);
     T.setLayoutY(900);
-    Button U = new Button("U");
+    final Button U = new Button("U");
     U.setLayoutX(1050);
     U.setLayoutY(900);
-    Button V = new Button("V");
+    final Button V = new Button("V");
     V.setLayoutX(1100);
     V.setLayoutY(900);
-    Button W = new Button("W");
+    final Button W = new Button("W");
     W.setLayoutX(1150);
     W.setLayoutY(900);
-    Button X = new Button("X");
+    final Button X = new Button("X");
     X.setLayoutX(1200);
     X.setLayoutY(900);
-    Button Y = new Button("Y");
+    final Button Y = new Button("Y");
     Y.setLayoutX(1250);
     Y.setLayoutY(900);
-    Button Z = new Button("Z");
+    final Button Z = new Button("Z");
     Z.setLayoutX(1300);
     Z.setLayoutY(900);
     pane.getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);
-    //pane.getChildren().remove(A);
+    
+    A.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("A") == true || secretWord.contains("a") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(A);
+               if(lose == false)
+               {
+                   pane.getChildren().add(stickManParts[]);
+                   if(//max in parts met do head)
+               }
+               else
+               {
+                   
+               }
+           }
+        }
+    });
   }
   
   private String getSecretWord(TextField secretWord)
@@ -144,14 +165,5 @@ public class Hangman extends Application
       return mySecretWord;
   }
   
-}
-
-class ConfirmButtonHandler implements EventHandler<ActionEvent> 
-{
-  @Override
-  public void handle(ActionEvent e) 
-  {
-    
-  }
 }
 
