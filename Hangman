@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-
 public class Hangman extends Application 
 {
   String secretWord;
@@ -21,6 +19,11 @@ public class Hangman extends Application
   Pane pane = new Pane();
   boolean lose = false;
   char[] charArraySecretWord;
+  Text lostText = new Text(900, 200,"Game Over");
+  Text winText = new Text(901, 200, "You Win!");
+  Button replay = new Button("Play Again");
+  int lettersCorrectlyGuessed = 0;
+  Text displayText;
     
   @Override
   public void start(Stage primaryStage) 
@@ -49,6 +52,9 @@ public class Hangman extends Application
         }
     });
     
+    replay.setLayoutX(890);
+    replay.setLayoutY(215);
+    
     final Line[] stickManParts = {new Line(500, 400, 600, 600), new Line(500, 400, 400, 600), new Line(500, 400, 500, 200), new Line(500, 200, 600, 400), new Line(500, 200, 400, 400)};
     for(int index = 0; index < stickManParts.length; index++)
     {
@@ -56,7 +62,7 @@ public class Hangman extends Application
         stickManParts[index].setStroke(Color.TOMATO);
     }
    
-    Circle head = new Circle(500, 150, 50);
+    final Circle head = new Circle(500, 150, 50);
     head.setStrokeWidth(5);
     head.setStroke(Color.TOMATO);
     head.setFill(Color.TOMATO);
@@ -141,19 +147,29 @@ public class Hangman extends Application
     Z.setLayoutY(900);
     pane.getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);
     
+    replay.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+            pane.getChildren().removeAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z, replay, lostText, winText, stickManParts[0], stickManParts[1], stickManParts[2], stickManParts[3], stickManParts[4], head, displayText);
+            pane.getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);
+        }
+    });
+    
     A.setOnAction(new EventHandler<ActionEvent>()
     {
         @Override
         public void handle(ActionEvent event)
         {
-           if(secretWord.contains("A") == true || secretWord.contains("a") == true)//make letter appear in correct field
+           if((secretWord.contains("A") == true || secretWord.contains("a") == true) && lettersCorrectlyGuessed < secretWord.length())//make letter appear in correct field
            {
                for(int index = 0; index < secretWord.length(); index++)
                {
                    if (charArraySecretWord[index] == 'A' || charArraySecretWord[index] == 'a')
                    {
                        pane.getChildren().remove(A);
-                       Text displayText = new Text((index + 1) * 15 + 885 , 350, "A");
+                       displayText = new Text((index + 1) * 15 + 885 , 350, "A");
                        pane.getChildren().add(displayText);
                    }
                }
@@ -169,8 +185,14 @@ public class Hangman extends Application
                else
                {
                    pane.getChildren().add(head);
-                   pane.getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);
+                   pane.getChildren().addAll(lostText, replay);
+                   stickManPartsCount = 0;
                }
+           }
+           if (lettersCorrectlyGuessed > secretWord.length()-1)
+           {
+                pane.getChildren().addAll(winText, replay);
+                stickManPartsCount = 0;
            }
         }
     });
@@ -179,14 +201,14 @@ public class Hangman extends Application
         @Override
         public void handle(ActionEvent event)
         {
-           if(secretWord.contains("B") == true || secretWord.contains("b") == true)//make letter appear in correct field
+           if((secretWord.contains("B") == true || secretWord.contains("b") == true) && lettersCorrectlyGuessed < secretWord.length())//make letter appear in correct field
            {
                for(int index = 0; index < secretWord.length(); index++)
                {
                    if (charArraySecretWord[index] == 'B' || charArraySecretWord[index] == 'b')
                    {
-                       pane.getChildren().remove(A);
-                       Text displayText = new Text((index + 1) * 15 + 885 , 350, "B");
+                       pane.getChildren().remove(B);
+                       displayText = new Text((index + 1) * 15 + 885 , 350, "B");
                        pane.getChildren().add(displayText);
                    }
                }
@@ -199,16 +221,17 @@ public class Hangman extends Application
                    pane.getChildren().add(stickManParts[stickManPartsCount]);
                    stickManPartsCount++;
                }
-               else if (stickManPartsCount == 5)
-               {
-                   pane.getChildren().add(head);
-                   Text lostText = new Text(900, 200,"Game Over");
-                   pane.getChildren().add(lostText);
-               }
                else
                {
-                   
+                   pane.getChildren().add(head);
+                   pane.getChildren().addAll(lostText, replay);
+                   stickManPartsCount = 0;
                }
+           }
+           if (lettersCorrectlyGuessed > secretWord.length()-1)
+           {
+                pane.getChildren().addAll(winText, replay);
+                stickManPartsCount = 0;
            }
         }
     });
