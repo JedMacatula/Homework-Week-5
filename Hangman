@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,14 +10,17 @@ import javafx.scene.shape.Circle;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import java.lang.String;
+import javafx.scene.text.Text;
+
 
 public class Hangman extends Application 
 {
   String secretWord;
+  String secretWordTemp;
   int stickManPartsCount = 0;
   Pane pane = new Pane();
   boolean lose = false;
+  char[] charArraySecretWord;
     
   @Override
   public void start(Stage primaryStage) 
@@ -26,20 +30,25 @@ public class Hangman extends Application
     primaryStage.setScene(scene);             
     primaryStage.show();
     
+    Text correctLetters = new Text(900, 300, "Secret Word");
+    pane.getChildren().add(correctLetters);
     final TextField TFsecretWord = new TextField();
     pane.getChildren().add(TFsecretWord);
     Button BTNConfirm = new Button("confirm");
     BTNConfirm.setLayoutY(25);
+    pane.getChildren().add(BTNConfirm);
     BTNConfirm.setOnAction(new EventHandler<ActionEvent>()
     {
         @Override
         public void handle(ActionEvent event)
         {
            secretWord = TFsecretWord.getText();
+           secretWordTemp = TFsecretWord.getText();
+           charArraySecretWord = secretWordTemp.toCharArray();
+           TFsecretWord.clear();
         }
     });
     
-    pane.getChildren().add(BTNConfirm);
     final Line[] stickManParts = {new Line(500, 400, 600, 600), new Line(500, 400, 400, 600), new Line(500, 400, 500, 200), new Line(500, 200, 600, 400), new Line(500, 200, 400, 400)};
     for(int index = 0; index < stickManParts.length; index++)
     {
@@ -139,19 +148,642 @@ public class Hangman extends Application
         {
            if(secretWord.contains("A") == true || secretWord.contains("a") == true)//make letter appear in correct field
            {
-               System.out.print("NIIIIIIIIIICE");
+               for(int index = 0; index < secretWord.length(); index++)
+               {
+                   if (charArraySecretWord[index] == 'A' || charArraySecretWord[index] == 'a')
+                   {
+                       pane.getChildren().remove(A);
+                       Text displayText = new Text((index + 1) * 15 + 885 , 350, "A");
+                       pane.getChildren().add(displayText);
+                   }
+               }
            }
            else//put letter on side (hide letter) and make part appear
            {
                pane.getChildren().remove(A);
-               if(lose == false)
+               if(stickManPartsCount < 5)
                {
-                   pane.getChildren().add(stickManParts[]);
-                   if(//max in parts met do head)
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+                   pane.getChildren().addAll(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y ,Z);
+               }
+           }
+        }
+    });
+    B.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("B") == true || secretWord.contains("b") == true)//make letter appear in correct field
+           {
+               for(int index = 0; index < secretWord.length(); index++)
+               {
+                   if (charArraySecretWord[index] == 'B' || charArraySecretWord[index] == 'b')
+                   {
+                       pane.getChildren().remove(A);
+                       Text displayText = new Text((index + 1) * 15 + 885 , 350, "B");
+                       pane.getChildren().add(displayText);
+                   }
+               }
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(B);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else if (stickManPartsCount == 5)
+               {
+                   pane.getChildren().add(head);
+                   Text lostText = new Text(900, 200,"Game Over");
+                   pane.getChildren().add(lostText);
                }
                else
                {
                    
+               }
+           }
+        }
+    });
+    C.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("C") == true || secretWord.contains("c") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(C);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    D.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("D") == true || secretWord.contains("d") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(D);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    E.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("E") == true || secretWord.contains("e") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(E);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    F.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("F") == true || secretWord.contains("f") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(F);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    G.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("G") == true || secretWord.contains("g") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(G);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    H.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("H") == true || secretWord.contains("h") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(H);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    I.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("I") == true || secretWord.contains("i") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(I);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    J.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("J") == true || secretWord.contains("j") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(J);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    K.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("K") == true || secretWord.contains("k") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(K);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    L.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("L") == true || secretWord.contains("l") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(L);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    M.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("M") == true || secretWord.contains("m") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(M);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    N.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("N") == true || secretWord.contains("n") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(N);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    O.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("O") == true || secretWord.contains("o") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(O);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    P.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("P") == true || secretWord.contains("p") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(P);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    Q.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("Q") == true || secretWord.contains("q") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(Q);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    R.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("R") == true || secretWord.contains("r") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(R);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    S.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("S") == true || secretWord.contains("s") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(S);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    T.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("T") == true || secretWord.contains("t") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(T);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    U.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("U") == true || secretWord.contains("u") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(U);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    V.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("V") == true || secretWord.contains("v") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(V);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    W.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("W") == true || secretWord.contains("w") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(W);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    X.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("X") == true || secretWord.contains("x") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(X);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    Y.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("Y") == true || secretWord.contains("y") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(Y);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
+               }
+           }
+        }
+    });
+    Z.setOnAction(new EventHandler<ActionEvent>()
+    {
+        @Override
+        public void handle(ActionEvent event)
+        {
+           if(secretWord.contains("Z") == true || secretWord.contains("z") == true)//make letter appear in correct field
+           {
+               System.out.print("NIIIIIIIIIICE");
+           }
+           else//put letter on side (hide letter) and make part appear
+           {
+               pane.getChildren().remove(Z);
+               if(stickManPartsCount < 5)
+               {
+                   pane.getChildren().add(stickManParts[stickManPartsCount]);
+                   stickManPartsCount++;
+               }
+               else
+               {
+                   pane.getChildren().add(head);
                }
            }
         }
